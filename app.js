@@ -95,7 +95,7 @@ const createSession = function(id, description) {
 
   client.on('ready', () => {
     io.emit('ready', { id: id });
-    io.emit('message', { id: id, text: 'WhatsApp conectado!' });
+    io.emit('message', { id: id, text: 'Conectado' });
 
     const savedSessions = getSessionsFile();
     const sessionIndex = savedSessions.findIndex(sess => sess.id == id);
