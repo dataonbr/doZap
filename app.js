@@ -119,7 +119,7 @@ const createSession = function(id, description) {
   });
 
   client.on('disconnected', (reason) => {
-    io.emit('message', { id: id, text: 'Whatsapp Disconectado!' });
+    io.emit('message', { id: id, text: 'Desconectado' });
     fs.unlinkSync(SESSION_FILE_PATH, function(err) {
         if(err) return console.log(err);
         console.log('Session file deleted!');
