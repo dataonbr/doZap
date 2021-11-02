@@ -2,14 +2,20 @@ const { Client, MessageMedia } = require('whatsapp-web.js');
 const express = require('express');
 const socketIO = require('socket.io');
 const qrcode = require('qrcode');
-const http = require('http');
+const path = require('path')
+const http = require('https');
 const fs = require('fs');
 const { phoneNumberFormatter } = require('./helpers/formatter');
 const axios = require('axios');
 const port = process.env.PORT || 8000;
 
 const app = express();
-const server = http.createServer(app);
+
+const server = http.createServer({
+  key: fs.readFileSync(path.join(__dirname,'cert', 'dataon-key.pem')),
+  cert: fs.readFileSync(path.join(__dirname,'cert', 'dataon-cert.pem')),
+}, app);
+
 const io = socketIO(server);
 
 app.use(express.json());
